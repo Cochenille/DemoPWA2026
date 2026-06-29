@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloc-notes PWA</title>
+
+  <!-- 1. On lie le manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- 2. Couleur de la barre système (doit correspondre au manifest) -->
+  <meta name="theme-color" content="#7C3AED">
+
+  <!-- 3. Icône pour l'écran d'accueil iOS (Safari n'utilise pas les icônes du manifest) -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Bloc-notes</h1>
+    <!-- Bouton d'installation : caché par défaut, révélé par install.js -->
+    <button id="butInstall" class="btn-install" aria-label="Installer l'application" hidden>
+      Installer l'app
+    </button>
+  </header>
+
+  <!-- Bandeau d'aide pour les usagers iOS (révélé par ios-hint.js) -->
+  <div id="iosHint" class="ios-hint" hidden>
+    Sur iPhone/iPad : appuie sur <strong>Partager</strong>, puis
+    <strong>« Sur l'écran d'accueil »</strong> pour installer l'app.
+  </div>
+
+  <main>
+    <p class="hint">Écris ta note ci-dessous. Elle est sauvegardée automatiquement,
+      même sans connexion internet.</p>
+    <textarea id="note" placeholder="Ta note…"></textarea>
+    <p id="status" class="status">Prêt.</p>
+  </main>
+
+  <!-- Enregistrement du service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then((reg) => console.log('[App] Service worker enregistré', reg.scope))
+          .catch((err) => console.error('[App] Échec d\'enregistrement du SW', err));
+      });
+    }
+
+    // Petite logique « hors-ligne » : la note est sauvegardée dans localStorage.
+    const note = document.getElementById('note');
+    const status = document.getElementById('status');
+    note.value = localStorage.getItem('note') || '';
+
+    // Raccourci du manifest : ?action=new vide la note
+    if (new URLSearchParams(location.search).get('action') === 'new') {
+      note.value = '';
+      localStorage.removeItem('note');
+    }
+
+    note.addEventListener('input', () => {
+      localStorage.setItem('note', note.value);
+      status.textContent = 'Enregistré ' + new Date().toLocaleTimeString('fr-CA');
+    });
+
+    // Indicateur de connexion
+    function updateOnline() {
+      status.textContent = navigator.onLine ? 'En ligne.' : 'Hors-ligne — tout fonctionne quand même.';
+    }
+    window.addEventListener('online', updateOnline);
+    window.addEventListener('offline', updateOnline);
+  </script>
+
+  <!-- Logique d'installation -->
+  <script src="js/install.js"></script>
+  <script src="js/ios-hint.js"></script>
+</body>
+</html>

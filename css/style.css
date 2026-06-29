@@ -1,0 +1,78 @@
+:root {
+  --ink: #120F1C;
+  --violet: #7C3AED;
+  --violet-light: #A78BFA;
+  --paper: #F6F5FB;
+  --text: #1B1830;
+  --muted: #6E6B86;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--paper);
+  color: var(--text);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--ink);
+  color: #fff;
+}
+
+.topbar h1 { font-size: 1.25rem; margin: 0; }
+
+.btn-install {
+  background: var(--violet);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-install:hover { background: #6d28d9; }
+
+.ios-hint {
+  background: #EDE9FE;
+  color: #4c1d95;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+}
+
+.hint { color: var(--muted); margin-top: 0; }
+
+textarea {
+  width: 100%;
+  min-height: 45vh;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 2px solid #E7E3F3;
+  border-radius: 12px;
+  resize: vertical;
+  font-family: inherit;
+}
+textarea:focus { outline: none; border-color: var(--violet); }
+
+.status { color: var(--muted); font-size: 0.85rem; }
+
+/* Page hors-ligne */
+.offline-page main { text-align: center; padding-top: 18vh; }
+.offline-page h1 { color: var(--violet); }
+.offline-page p { color: var(--muted); }
+.offline-page .btn-install { margin-top: 1rem; }

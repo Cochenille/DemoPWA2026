@@ -1,0 +1,57 @@
+{
+  "name": "Bloc-notes PWA",
+  "short_name": "BlocNotes",
+  "description": "Un bloc-notes simple qui fonctionne même hors-ligne.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#120F1C",
+  "theme_color": "#7C3AED",
+  "lang": "fr-CA",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/screenshot-mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Écran principal du bloc-notes sur mobile"
+    },
+    {
+      "src": "screenshots/screenshot-wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Écran principal du bloc-notes sur grand écran"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nouvelle note",
+      "short_name": "Nouvelle",
+      "url": "/index.html?action=new",
+      "description": "Vider la note et recommencer"
+    }
+  ]
+}
