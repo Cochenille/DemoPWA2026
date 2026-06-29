@@ -2,7 +2,7 @@
   "name": "Bloc-notes PWA",
   "short_name": "BlocNotes",
   "description": "Un bloc-notes simple qui fonctionne même hors-ligne.",
-  "start_url": "/index.html",
+  "start_url": "DemoPWA2026/index.html",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
